@@ -27,6 +27,8 @@ const onload = new Audio('./assets/audio/onload.mp3')
 onload.type = 'audio/mp3'
 const lose = new Audio('./assets/audio/lose.wav')
 lose.type = 'audio/mp3'
+const bgmusic = new Audio('./assets/audio/bgmusic.mp3')
+lose.type = 'audio/mp3'
 
 
 window.addEventListener('load', () => {
@@ -109,14 +111,14 @@ function focus() {
 
 /*----Function to start the game -----*/
 button.addEventListener('click', () => {
-    start.play();
-    first.disabled = false;
     onload.pause();
+    first.disabled = false;
+    bgmusic.play();
     play.innerHTML = 'Type as fast as you can';
     focus()
 
 
-    let timer = 4;
+    let timer = 99;
     let progress = setInterval(displayTime, 1000);
     /*------Function to display time -----*/
     function displayTime() {
@@ -130,7 +132,7 @@ button.addEventListener('click', () => {
             para.innerHTML = 'Click on Restart to play again';
             restart.style.display = 'none';
             shake.style.display = 'inline';
-            start.pause();
+            bgmusic.pause();
             lose.play();
             document.querySelector(".seconds").innerHTML = "Time Over !";
             play.style.visibility = 'visible';
