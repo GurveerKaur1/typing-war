@@ -60,8 +60,10 @@ let words = ['dinosaur', 'love', 'pineapple', 'calendar', 'robot', 'building', '
 let count = 0;
 function random() {
     let random = Math.floor(Math.random() * words.length);
-    words.splice(random, 1)
+   
     para.innerHTML = words[random]
+    words.splice(random, 1)
+    
     // start.play()
 }
 
