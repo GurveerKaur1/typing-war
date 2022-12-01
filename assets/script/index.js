@@ -69,7 +69,7 @@ function random() {
 /*-----Function to get scores-------*/
 
 function date() {
-    const percentage = (count / words.length * 100).toPrecision(3)
+    const percentage = (count / 90 * 100).toPrecision(3)
     const now = new Date();
     const newdate = now.toString().substring(3, 15);
     const newValue = new Score(newdate, count, percentage);
