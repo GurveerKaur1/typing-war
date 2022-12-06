@@ -119,10 +119,11 @@ button.addEventListener('click', () => {
     bgmusic.play();
     play.innerHTML = 'Type as fast as you can';
     focus()
+    
     button.style.display = 'none'
 
 
-    let timer = 5;
+    let timer = 99;
     let progress = setInterval(displayTime, 1000);
     /*------Function to display time -----*/
     function displayTime() {
@@ -142,21 +143,25 @@ button.addEventListener('click', () => {
             play.style.visibility = 'visible';
             date();
             
+            
            }
     }
     random()
 })
 
-restart.addEventListener('click', () => {
-    window.location.reload()
-})
+// restart.addEventListener('click', () => {
+//     window.location.reload()
+// })
 
 shake.addEventListener('click', () => {
+    hits.innerText = 'Hits : 0';
+            count = 0;
     onload.pause();
     bgmusic.play();
     play.innerHTML = 'Type as fast as you can';
-    first.disabled = false
+     first.disabled = false
     focus();
+
     button.style.display = 'none'
     box.style.display = 'none'
     shake.style.display = 'none'
@@ -181,6 +186,8 @@ shake.addEventListener('click', () => {
             document.querySelector(".seconds").innerHTML = "Time Over !";
             play.style.visibility = 'visible';
             date();
+            
+            value();
             
            }
     }
