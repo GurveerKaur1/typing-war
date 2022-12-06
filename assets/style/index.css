@@ -1,3 +1,10 @@
+@import "./reset.css";
+
+.container {
+    width:(100% - 30px , 960px);
+    margin-inline: auto;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -84,7 +91,7 @@ input {
     height: 70px;
     background-color: #c15544;
     padding: 15px;
-    font-size: 14px;
+    font-size: 20px;
     margin-bottom: 50px;
     margin-top: 40px;
     color: #d6d6d6;
@@ -114,7 +121,7 @@ input {
     /* margin-left: 150px; */
     font-size: 36px;
     line-height: 76px;
-    margin-top: 44px;
+    margin-top: 10px;
 }
 
 h3 {
@@ -156,7 +163,7 @@ button {
 .animation {
     text-shadow: 1px 1px 1px red, 2px 2px 1px red;
     animation: trans 2s ease-in-out;
-    font-size: 20px;
+    font-size: 28px;
 }
 
 @keyframes trans {

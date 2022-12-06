@@ -33,6 +33,7 @@ lose.type = 'audio/mp3'
 
 window.addEventListener('load', () => {
     first.disabled = true;
+    restart.style.display = 'none'
 });
 
 /*------Function to get random words--------------*/
@@ -118,9 +119,10 @@ button.addEventListener('click', () => {
     bgmusic.play();
     play.innerHTML = 'Type as fast as you can';
     focus()
+    button.style.display = 'none'
 
 
-    let timer = 99;
+    let timer = 5;
     let progress = setInterval(displayTime, 1000);
     /*------Function to display time -----*/
     function displayTime() {
@@ -139,6 +141,7 @@ button.addEventListener('click', () => {
             document.querySelector(".seconds").innerHTML = "Time Over !";
             play.style.visibility = 'visible';
             date();
+            
            }
     }
     random()
@@ -149,7 +152,39 @@ restart.addEventListener('click', () => {
 })
 
 shake.addEventListener('click', () => {
-    window.location.reload()
+    onload.pause();
+    bgmusic.play();
+    play.innerHTML = 'Type as fast as you can';
+    first.disabled = false
+    focus();
+    button.style.display = 'none'
+    box.style.display = 'none'
+    shake.style.display = 'none'
+
+
+    let timer = 5;
+    let progress = setInterval(displayTime, 1000);
+    /*------Function to display time -----*/
+    function displayTime() {
+        document.querySelector(".seconds").innerHTML = timer + " Seconds";
+        timer -= 1;
+        if (timer === 0) {
+            clearInterval(progress);
+            first.innerHTML = '';
+            first.disabled = true;
+            button.disabled = true;
+            para.innerHTML = 'Click on Restart to play again';
+            restart.style.display = 'none';
+            shake.style.display = 'inline';
+            bgmusic.pause();
+            lose.play();
+            document.querySelector(".seconds").innerHTML = "Time Over !";
+            play.style.visibility = 'visible';
+            date();
+            
+           }
+    }
+    random()
 })
 onEvent('load', window, () => {
     onload.play();
