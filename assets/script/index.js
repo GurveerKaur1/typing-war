@@ -140,7 +140,7 @@ button.addEventListener('click', () => {
     button.style.display = 'none'
 
 
-    let timer = 98;
+    let timer = 9;
     let progress = setInterval(displayTime, 1000);
     /*------Function to display time -----*/
     function displayTime() {
@@ -184,7 +184,7 @@ shake.addEventListener('click', () => {
     shake.style.display = 'none'
 
 
-    let timer = 98;
+    let timer = 9;
     let progress = setInterval(displayTime, 1000);
     /*------Function to display time -----*/
     function displayTime() {
