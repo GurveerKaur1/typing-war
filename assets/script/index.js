@@ -229,7 +229,7 @@ window.addEventListener('keyup', (event) => {
 function saveScores() {
     const savedScores = JSON.parse(localStorage.getItem('savedScores')) || [];
 
-    savedScores.sort((a, b) => b.score - a.score);
+    savedScores.sort((a , b) => b.score - a.score);
     savedScores.splice(9);
 
     my.innerHTML = savedScores.map(result => {
