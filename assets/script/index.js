@@ -233,8 +233,8 @@ function saveScores() {
     printScores.splice(9);
 
     my.innerHTML = printScores.map(update => {
-        return `<li>${update.score} Words ${update.percent}%</li>`
-    })
+        return `<li>${update.score} Words  <span></span>  || ${update.percent}%</li>`
+    }).join(' ')
 
 
 }

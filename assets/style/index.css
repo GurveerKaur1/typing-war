@@ -300,5 +300,13 @@ button {
     visibility: hidden;
     padding: 30px;
     box-sizing: border-box;
+     text-align: center; 
+    /* align-items: center; */
+    
 }
 
+ol li{
+    margin-top: 20px;
+    text-align:center;
+    margin-left: 30px;
+}
