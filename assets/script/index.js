@@ -20,6 +20,9 @@ const box = select('.score')
 const animation = select('.animation')
 const feedback = select('.feedback')
 const valued = select('.highScores')
+
+const my = select('.my')
+
 const start = new Audio('./assets/audio/start-game.wav')
 start.type = 'audio/mp3';
 const bonus = new Audio('./assets/audio/bonus.wav')
@@ -60,7 +63,7 @@ let words = ['dinosaur', 'love', 'pineapple', 'calendar', 'robot', 'building', '
 // console.log(deck1);
 let high;
 
-// high = localStorage.getItem('hits') == null ?
+
 
 if(localStorage.getItem('hits') == null){
     high = 0;
@@ -80,13 +83,6 @@ function random() {
 }
 
 const paragraph = document.createElement('p');
-
-valued.appendChild(paragraph)
-// const scores ={
-//     hits: `${count}`,
-//     percent:(count / 90 * 100).toPrecision(3)
-// }
-// array.push(scores)
 
 
 /*-----Function to get scores-------*/
@@ -144,7 +140,7 @@ button.addEventListener('click', () => {
     button.style.display = 'none'
 
 
-    let timer = 9;
+    let timer = 98;
     let progress = setInterval(displayTime, 1000);
     /*------Function to display time -----*/
     function displayTime() {
@@ -164,49 +160,14 @@ button.addEventListener('click', () => {
             document.querySelector(".seconds").innerHTML = "Time Over !";
             play.style.visibility = 'visible';
             date();
-
-            localStorage.setItem('array', JSON.stringify(array))
-            const scores ={
-                hits: `${count}`,
-                percent:(count / 90 * 100).toPrecision(3)
-            }
-           
-           // console.log(array)
-            console.log(scores)
-            
-           // console.log(store())
-         
         
-           array.push(scores)
+           getData()
 
-       //const stringfiedOne = JSON.stringify(array)
-           //console.log(stringfiedOne)
-        //    function store(){
-         
-           
-        // }
-        //    console.log( store())
-        //    // console.log(localStorage)
-             
-        //    }
-        //    console.log(turns)
     }}
-    if(localStorage.getItem('array') === null){
-        paragraph.innerHTML = (`high Score = 0`)
-  }else {
-     paragraph.innerHTML += (JSON.parse(localStorage.getItem('array')))
-  }
+
     random()
-    // if(localStorage.getItem('hits') === null){
-    //     console.log(`high Score = 0`)
-    // }else {
-    //     console.log(`HighScore = ${localStorage.getItem('hits')}`)
-    // }
 })
 
-// restart.addEventListener('click', () => {
-//     window.location.reload()
-// })
 
 shake.addEventListener('click', () => {
     hits.innerText = 'Hits : 0';
@@ -222,7 +183,7 @@ shake.addEventListener('click', () => {
     shake.style.display = 'none'
 
 
-    let timer = 5;
+    let timer = 98;
     let progress = setInterval(displayTime, 1000);
     /*------Function to display time -----*/
     function displayTime() {
@@ -238,54 +199,15 @@ shake.addEventListener('click', () => {
             restart.style.display = 'none';
             shake.style.display = 'inline';
             box.style.visibility = 'visible'
-            // bgmusic.pause();
-            // lose.play();
+            bgmusic.pause();
+             lose.play();
             document.querySelector(".seconds").innerHTML = "Time Over !";
             play.style.visibility = 'visible';
             date();
             
             value();
 
-            
-            const scores ={
-                hits: `${count}`,
-                percent:(count / 90 * 100).toPrecision(3)
-            }
-        
-           // console.log(array)
-         
-
-            console.log(scores)
-            array.push(scores)
-            let objectText = JSON.stringify(array, null, '  ');
-         // valued.innerHTML = objectText;
-
-       // valued.innerHTML = array
-            console.log(array.sort())
-
-            localStorage.setItem('array', JSON.stringify(objectText))
-            
-        //   valued.innerHTML = (JSON.parse(localStorage.getItem('array')))
-          // console.log(JSON.parse(localStorage.getItem('hits')))
-  //(localStorage)
-          //  console.log(scores)
-            
-        //    // console.log(store())
-        //    function store(){
-            
-           
-        // }
-        //   console.log( store())
-        
-        //    localStorage.setItem('hits', count)
-          if(localStorage.getItem('array') === null){
-           valued.innerHTML = (`high Score = 0`)
-     }else {
-        valued.innerHTML = paragraph.innerHTML + (JSON.parse(localStorage.getItem('array')))
-     }
-            
-        //    }
-        //    console.log(turns)
+         getData();
 
           
         } 
@@ -295,13 +217,7 @@ shake.addEventListener('click', () => {
 onEvent('load', window, () => {
     onload.play();
     valued.style.visibility = 'visible'
-    if(localStorage.getItem('array') === null){
-        valued.innerHTML = (`high Score = 0`)
-  }else {
-     valued.innerHTML = (JSON.parse(localStorage.getItem('array')))
-  }
-
-  valued.innerHTML = paragraph.innerHTML + array2
+    getData()
 
 })
 
@@ -310,46 +226,24 @@ window.addEventListener('keyup', (event) => {
 
 })
 
-// localStorage.setItem('hits', newscore)
-// if(localStorage.getItem('hits') === null){
-//     console.log(`high Score = 0`)
-// }else {
-//     console.log(`HighScore = ${localStorage.getItem('hits')}`)
-// }
+function getData() {
+    let percentage = ((count / 90) * 100).toFixed(2);
+  const savedScores = JSON.parse(localStorage.getItem('savedScores')) || [];
 
-// console.log( store())
+  const result = {
+    score: count,
+    perc: percentage
+  };
 
-// for (const turn of turns) {
-//     console.log(localStorage)
-    
-// }
-// console.log(localStorage)
+  savedScores.push(result);
+  savedScores.sort((a, b) => b.score - a.score);
+  savedScores.splice(9);
 
+  localStorage.setItem('savedScores', JSON.stringify(savedScores))
+  
 
-// const scores ={
-//     hits: `${count}`,
-//     percent:(count / 90 * 100).toPrecision(3)
-// }
-
-// console.log(scores)
-
-
-// JSON.parse(localStorage.getItem('array'))
-//c(localStorage)
-// const paragraph = document.createElement('p');
-
-// valued.appendChild(paragraph)
-
-let array2 = (JSON.parse(localStorage.getItem('array')))
-array2.split(', ').join("\r\n")
-valued.innerHTML = paragraph.innerHTML + array2
-
-//   localStorage.setItem('hits', count)
-    //       if(localStorage.getItem('array') === null){
-    //        paragraph.innerHTML = (`high Score = 0`)
-    //  }else {
-    //     paragraph.innerHTML += (JSON.parse(localStorage.getItem('array')))
-    //  }
-//console.log(array.push(scores))
-// 
+  my.innerHTML = savedScores.map(result => {
+    return `<li>${result.score} Words ${result.perc}%</li>`
+})
+}
 
