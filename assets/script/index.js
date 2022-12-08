@@ -227,13 +227,13 @@ window.addEventListener('keyup', (event) => {
 
 })
 function saveScores() {
-    const savedScores = JSON.parse(localStorage.getItem('savedScores')) || [];
+    const printScores = JSON.parse(localStorage.getItem('printScores')) || [];
 
-    savedScores.sort((a , b) => b.score - a.score);
-    savedScores.splice(9);
+    printScores.sort((a , b) => b.score - a.score);
+    printScores.splice(9);
 
-    my.innerHTML = savedScores.map(result => {
-        return `<li>${result.score} Words ${result.percent}%</li>`
+    my.innerHTML = printScores.map(update => {
+        return `<li>${update.score} Words ${update.percent}%</li>`
     })
 
 
@@ -241,14 +241,14 @@ function saveScores() {
 
 function getData() {
     let percentage = ((count / 90) * 100).toFixed(2);
-    const savedScores = JSON.parse(localStorage.getItem('savedScores')) || [];
-    const result = {
+    const printScores = JSON.parse(localStorage.getItem('printScores')) || [];
+    const update = {
         score: count,
         percent: percentage
     };
 
-    savedScores.push(result);
-    localStorage.setItem('savedScores', JSON.stringify(savedScores))
+    printScores.push(update);
+    localStorage.setItem('printScores', JSON.stringify(printScores))
 
 
 
