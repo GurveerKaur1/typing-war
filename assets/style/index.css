@@ -12,6 +12,7 @@
 .container {
     width: min(100% - 30px, 1280px);
     margin-inline: auto;
+    height: 100vh;
 }
 
 body {
@@ -20,7 +21,7 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     margin: 0;
-    height: 100vh;
+    /* height: 100vh; */
 }
 
 h2 {
@@ -242,7 +243,7 @@ button {
     border-radius: 12px;
     margin-left: 10px;
     text-align: center;
-    display: none;
+    visibility: hidden;
     animation: trans 2s ease-in-out;
     margin-top: 100px;
 }
@@ -265,13 +266,13 @@ button {
 
 .feedback {
     margin-top: 20px;
-    font-family: 'Lucida Calligraphy';
+    /* font-family: 'Lucida Calligraphy'; */
     color: #CCAC25
 }
 
 .score2 {
     font-family: cursive;
-}
+} 
 
 .trans {
     background-color: #fff;
@@ -283,3 +284,21 @@ button {
     text-align: center;
     animation: trans 2s ease-in-out;
 }
+
+/* .main{
+    display: flex;
+} */
+
+.highScores{
+    background-color: #fff;
+    width: 320px;
+    height: 400px;
+    margin-left: 10px;
+    opacity: 0.65;
+    border-radius: 12px;
+    margin-top: 100px;
+    visibility: hidden;
+    padding: 30px;
+    box-sizing: border-box;
+}
+

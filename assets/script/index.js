@@ -19,6 +19,7 @@ const score = select('.score2')
 const box = select('.score')
 const animation = select('.animation')
 const feedback = select('.feedback')
+const valued = select('.highScores')
 const start = new Audio('./assets/audio/start-game.wav')
 start.type = 'audio/mp3';
 const bonus = new Audio('./assets/audio/bonus.wav')
@@ -57,16 +58,35 @@ let words = ['dinosaur', 'love', 'pineapple', 'calendar', 'robot', 'building', '
 // const deck1 = [...new Array(90).keys()];
 // deck1.sort(() => Math.random()-0.5);
 // console.log(deck1);
+let high;
 
+// high = localStorage.getItem('hits') == null ?
+
+if(localStorage.getItem('hits') == null){
+    high = 0;
+}else {
+    high = localStorage.getItem('hits')
+}
 let count = 0;
+let turns = 0;
+let array =[];
 function random() {
     let random = Math.floor(Math.random() * words.length);
    
     para.innerHTML = words[random]
     words.splice(random, 1)
     
-    // start.play()
+    start.play()
 }
+
+const paragraph = document.createElement('p');
+
+valued.appendChild(paragraph)
+// const scores ={
+//     hits: `${count}`,
+//     percent:(count / 90 * 100).toPrecision(3)
+// }
+// array.push(scores)
 
 
 /*-----Function to get scores-------*/
@@ -77,7 +97,7 @@ function date() {
     const newdate = now.toString().substring(3, 15);
     const newValue = new Score(newdate, count, percentage);
     const newscore = newValue.getInfo();
-    box.style.display = 'inline'
+    box.style.visibility = 'visible'
 
 
     /*---Feedback to the player---*/
@@ -97,6 +117,7 @@ function value() {
         first.value = '';
         count++;
         hits.innerHTML = `Hits : ${count}`;
+        
         random()
         bonus.play()
     }
@@ -116,20 +137,21 @@ function focus() {
 button.addEventListener('click', () => {
     onload.pause();
     first.disabled = false;
-    bgmusic.play();
+   bgmusic.play();
     play.innerHTML = 'Type as fast as you can';
     focus()
     
     button.style.display = 'none'
 
 
-    let timer = 99;
+    let timer = 9;
     let progress = setInterval(displayTime, 1000);
     /*------Function to display time -----*/
     function displayTime() {
         document.querySelector(".seconds").innerHTML = timer + " Seconds";
         timer -= 1;
-        if (timer === 0) {
+        if (timer === -1) {
+            turns++;
             clearInterval(progress);
             first.innerHTML = '';
             first.disabled = true;
@@ -142,11 +164,44 @@ button.addEventListener('click', () => {
             document.querySelector(".seconds").innerHTML = "Time Over !";
             play.style.visibility = 'visible';
             date();
+
+            localStorage.setItem('array', JSON.stringify(array))
+            const scores ={
+                hits: `${count}`,
+                percent:(count / 90 * 100).toPrecision(3)
+            }
+           
+           // console.log(array)
+            console.log(scores)
             
-            
-           }
-    }
+           // console.log(store())
+         
+        
+           array.push(scores)
+
+       //const stringfiedOne = JSON.stringify(array)
+           //console.log(stringfiedOne)
+        //    function store(){
+         
+           
+        // }
+        //    console.log( store())
+        //    // console.log(localStorage)
+             
+        //    }
+        //    console.log(turns)
+    }}
+    if(localStorage.getItem('array') === null){
+        paragraph.innerHTML = (`high Score = 0`)
+  }else {
+     paragraph.innerHTML += (JSON.parse(localStorage.getItem('array')))
+  }
     random()
+    // if(localStorage.getItem('hits') === null){
+    //     console.log(`high Score = 0`)
+    // }else {
+    //     console.log(`HighScore = ${localStorage.getItem('hits')}`)
+    // }
 })
 
 // restart.addEventListener('click', () => {
@@ -157,13 +212,13 @@ shake.addEventListener('click', () => {
     hits.innerText = 'Hits : 0';
             count = 0;
     onload.pause();
-    bgmusic.play();
+     bgmusic.play();
     play.innerHTML = 'Type as fast as you can';
      first.disabled = false
     focus();
 
     button.style.display = 'none'
-    box.style.display = 'none'
+    box.style.visibility = 'hidden'
     shake.style.display = 'none'
 
 
@@ -172,8 +227,9 @@ shake.addEventListener('click', () => {
     /*------Function to display time -----*/
     function displayTime() {
         document.querySelector(".seconds").innerHTML = timer + " Seconds";
-        timer -= 1;
-        if (timer === 0) {
+        timer = timer - 1;
+        if (timer === -1) {
+            turns++
             clearInterval(progress);
             first.innerHTML = '';
             first.disabled = true;
@@ -181,23 +237,119 @@ shake.addEventListener('click', () => {
             para.innerHTML = 'Click on Restart to play again';
             restart.style.display = 'none';
             shake.style.display = 'inline';
-            bgmusic.pause();
-            lose.play();
+            box.style.visibility = 'visible'
+            // bgmusic.pause();
+            // lose.play();
             document.querySelector(".seconds").innerHTML = "Time Over !";
             play.style.visibility = 'visible';
             date();
             
             value();
+
             
-           }
+            const scores ={
+                hits: `${count}`,
+                percent:(count / 90 * 100).toPrecision(3)
+            }
+        
+           // console.log(array)
+         
+
+            console.log(scores)
+            array.push(scores)
+            let objectText = JSON.stringify(array, null, '  ');
+         // valued.innerHTML = objectText;
+
+       // valued.innerHTML = array
+            console.log(array.sort())
+
+            localStorage.setItem('array', JSON.stringify(objectText))
+            
+        //   valued.innerHTML = (JSON.parse(localStorage.getItem('array')))
+          // console.log(JSON.parse(localStorage.getItem('hits')))
+  //(localStorage)
+          //  console.log(scores)
+            
+        //    // console.log(store())
+        //    function store(){
+            
+           
+        // }
+        //   console.log( store())
+        
+        //    localStorage.setItem('hits', count)
+          if(localStorage.getItem('array') === null){
+           valued.innerHTML = (`high Score = 0`)
+     }else {
+        valued.innerHTML = paragraph.innerHTML + (JSON.parse(localStorage.getItem('array')))
+     }
+            
+        //    }
+        //    console.log(turns)
+
+          
+        } 
     }
     random()
 })
 onEvent('load', window, () => {
     onload.play();
+    valued.style.visibility = 'visible'
+    if(localStorage.getItem('array') === null){
+        valued.innerHTML = (`high Score = 0`)
+  }else {
+     valued.innerHTML = (JSON.parse(localStorage.getItem('array')))
+  }
+
+  valued.innerHTML = paragraph.innerHTML + array2
+
 })
 
 window.addEventListener('keyup', (event) => {
     value()
 
 })
+
+// localStorage.setItem('hits', newscore)
+// if(localStorage.getItem('hits') === null){
+//     console.log(`high Score = 0`)
+// }else {
+//     console.log(`HighScore = ${localStorage.getItem('hits')}`)
+// }
+
+// console.log( store())
+
+// for (const turn of turns) {
+//     console.log(localStorage)
+    
+// }
+// console.log(localStorage)
+
+
+// const scores ={
+//     hits: `${count}`,
+//     percent:(count / 90 * 100).toPrecision(3)
+// }
+
+// console.log(scores)
+
+
+// JSON.parse(localStorage.getItem('array'))
+//c(localStorage)
+// const paragraph = document.createElement('p');
+
+// valued.appendChild(paragraph)
+
+let array2 = (JSON.parse(localStorage.getItem('array')))
+array2.split(', ').join("\r\n")
+valued.innerHTML = paragraph.innerHTML + array2
+
+//   localStorage.setItem('hits', count)
+    //       if(localStorage.getItem('array') === null){
+    //        paragraph.innerHTML = (`high Score = 0`)
+    //  }else {
+    //     paragraph.innerHTML += (JSON.parse(localStorage.getItem('array')))
+    //  }
+//console.log(array.push(scores))
+// 
+
