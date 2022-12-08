@@ -65,20 +65,20 @@ let high;
 
 
 
-if(localStorage.getItem('hits') == null){
+if (localStorage.getItem('hits') == null) {
     high = 0;
-}else {
+} else {
     high = localStorage.getItem('hits')
 }
 let count = 0;
 let turns = 0;
-let array =[];
+let array = [];
 function random() {
     let random = Math.floor(Math.random() * words.length);
-   
+
     para.innerHTML = words[random]
     words.splice(random, 1)
-    
+
     start.play()
 }
 
@@ -113,7 +113,7 @@ function value() {
         first.value = '';
         count++;
         hits.innerHTML = `Hits : ${count}`;
-        
+
         random()
         bonus.play()
     }
@@ -133,10 +133,10 @@ function focus() {
 button.addEventListener('click', () => {
     onload.pause();
     first.disabled = false;
-   bgmusic.play();
+    bgmusic.play();
     play.innerHTML = 'Type as fast as you can';
     focus()
-    
+
     button.style.display = 'none'
 
 
@@ -160,10 +160,11 @@ button.addEventListener('click', () => {
             document.querySelector(".seconds").innerHTML = "Time Over !";
             play.style.visibility = 'visible';
             date();
-        
-           getData()
 
-    }}
+            getData()
+
+        }
+    }
 
     random()
 })
@@ -171,11 +172,11 @@ button.addEventListener('click', () => {
 
 shake.addEventListener('click', () => {
     hits.innerText = 'Hits : 0';
-            count = 0;
+    count = 0;
     onload.pause();
-     bgmusic.play();
+    bgmusic.play();
     play.innerHTML = 'Type as fast as you can';
-     first.disabled = false
+    first.disabled = false
     focus();
 
     button.style.display = 'none'
@@ -200,17 +201,17 @@ shake.addEventListener('click', () => {
             shake.style.display = 'inline';
             box.style.visibility = 'visible'
             bgmusic.pause();
-             lose.play();
+            lose.play();
             document.querySelector(".seconds").innerHTML = "Time Over !";
             play.style.visibility = 'visible';
             date();
-            
+
             value();
 
-         getData();
+            getData();
 
-          
-        } 
+
+        }
     }
     random()
 })
@@ -225,25 +226,33 @@ window.addEventListener('keyup', (event) => {
     value()
 
 })
+function saveScores() {
+    const savedScores = JSON.parse(localStorage.getItem('savedScores')) || [];
+
+    savedScores.sort((a, b) => b.score - a.score);
+    savedScores.splice(9);
+
+    my.innerHTML = savedScores.map(result => {
+        return `<li>${result.score} Words ${result.percent}%</li>`
+    })
+
+
+}
 
 function getData() {
     let percentage = ((count / 90) * 100).toFixed(2);
-  const savedScores = JSON.parse(localStorage.getItem('savedScores')) || [];
+    const savedScores = JSON.parse(localStorage.getItem('savedScores')) || [];
+    const result = {
+        score: count,
+        percent: percentage
+    };
 
-  const result = {
-    score: count,
-    perc: percentage
-  };
+    savedScores.push(result);
+    localStorage.setItem('savedScores', JSON.stringify(savedScores))
 
-  savedScores.push(result);
-  savedScores.sort((a, b) => b.score - a.score);
-  savedScores.splice(9);
 
-  localStorage.setItem('savedScores', JSON.stringify(savedScores))
-  
 
-  my.innerHTML = savedScores.map(result => {
-    return `<li>${result.score} Words ${result.perc}%</li>`
-})
+    saveScores()
+
 }
 
