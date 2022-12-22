@@ -67,11 +67,6 @@ let high;
 
 
 
-if (localStorage.getItem('hits') == null) {
-    high = 0;
-} else {
-    high = localStorage.getItem('hits')
-}
 let count = 0;
 let turns = 0;
 let array = [];
@@ -164,7 +159,7 @@ button.addEventListener('click', () => {
             play.style.visibility = 'visible';
             date();
 
-            getData()
+            // getData()
             // box.style.display = 'grid'
             box.style.visibility = 'visible'
         //   two.style.display = 'none'
@@ -215,7 +210,7 @@ icon.style.display = 'flex'
 
             value();
 
-            getData();
+            // getData();
 
 
         }
@@ -224,7 +219,7 @@ icon.style.display = 'flex'
 })
 onEvent('click', restart, () => {
     onload.play();
-    valued.style.display = 'grid'
+    valued.style.visibility = 'visible'
     two.style.visibility = 'hidden'
     box.style.visibility = 'hidden'
     play.innerHTML = ''
@@ -234,7 +229,7 @@ onEvent('click', restart, () => {
 })
 
 onEvent('click', icon2, () => {
-    valued.style.display = 'none'
+    valued.style.visibility = 'hidden'
     box.style.visibility = 'visible'
     two.style.visibility = 'visible'
     play.innerHTML = 'Type as fast as you can';
@@ -250,9 +245,17 @@ function saveScores() {
     printScores.sort((a , b) => b.score - a.score);
     printScores.splice(9);
 
+
+    
+if (localStorage.getItem('printScores') == null) {
+    my.innerHTML = ''
+} else {
     my.innerHTML = printScores.map(update => {
         return `<li>${update.score} Words  <span></span>  || ${update.percent}%</li>`
     }).join(' ')
+
+}
+
 
 
 }
