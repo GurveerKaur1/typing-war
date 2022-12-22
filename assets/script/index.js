@@ -6,20 +6,21 @@ import { Score } from './score.js';
 
 const restart = select('.restart')
 const shake = select('.restart2')
-const body = select('body')
+const body = select('.flex')
 const para = select(' p')
 const first = select('.first')
-const two = select('.two')
+const two = select('.row')
 const button = select('.select')
 const hits = select('.hits')
 const timer = select('.seconds')
-const winner = select('.winner')
+const icon2 = select('.icon2')
 const play = select('.play');
 const score = select('.score2')
 const box = select('.score')
-const animation = select('.animation')
+const icon = select('.icon')
 const feedback = select('.feedback')
 const valued = select('.highScores')
+const time3 =document.querySelector(".seconds") 
 
 const my = select('.my')
 
@@ -33,11 +34,12 @@ const lose = new Audio('./assets/audio/lose.wav')
 lose.type = 'audio/mp3'
 const bgmusic = new Audio('./assets/audio/bgmusic.mp3')
 lose.type = 'audio/mp3'
+// const hide = select('.')
 
 
 window.addEventListener('load', () => {
     first.disabled = true;
-    restart.style.display = 'none'
+    // restart.style.display = 'none'
 });
 
 /*------Function to get random words--------------*/
@@ -144,7 +146,7 @@ button.addEventListener('click', () => {
     let progress = setInterval(displayTime, 1000);
     /*------Function to display time -----*/
     function displayTime() {
-        document.querySelector(".seconds").innerHTML = timer + " Seconds";
+        document.querySelector(".seconds").innerHTML = timer + " Sec";
         timer -= 1;
         if (timer === -1) {
             turns++;
@@ -153,16 +155,19 @@ button.addEventListener('click', () => {
             first.disabled = true;
             button.disabled = true;
             para.innerHTML = 'Click on Restart to play again';
-            restart.style.display = 'none';
-            shake.style.display = 'inline';
+            // restart.style.display = 'none';
+            icon.style.display = 'none'
+            // shake.style.display = 'inline';
             bgmusic.pause();
             lose.play();
-            document.querySelector(".seconds").innerHTML = "Time Over !";
+            document.querySelector(".seconds").innerHTML = "Over !";
             play.style.visibility = 'visible';
             date();
 
             getData()
-
+            // box.style.display = 'grid'
+            box.style.visibility = 'visible'
+        //   two.style.display = 'none'
         }
     }
 
@@ -178,17 +183,18 @@ shake.addEventListener('click', () => {
     play.innerHTML = 'Type as fast as you can';
     first.disabled = false
     focus();
-
+icon.style.display = 'flex'
     button.style.display = 'none'
     box.style.visibility = 'hidden'
-    shake.style.display = 'none'
+    // shake.style.display = 'none'
+    two.style.display = 'grid'
 
 
     let timer = 9;
     let progress = setInterval(displayTime, 1000);
     /*------Function to display time -----*/
     function displayTime() {
-        document.querySelector(".seconds").innerHTML = timer + " Seconds";
+        document.querySelector(".seconds").innerHTML = timer + " Sec";
         timer = timer - 1;
         if (timer === -1) {
             turns++
@@ -196,13 +202,14 @@ shake.addEventListener('click', () => {
             first.innerHTML = '';
             first.disabled = true;
             button.disabled = true;
+            icon.style.display = 'none'
             para.innerHTML = 'Click on Restart to play again';
-            restart.style.display = 'none';
-            shake.style.display = 'inline';
+            // restart.style.display = 'none';
+            // shake.style.display = 'inline';
             box.style.visibility = 'visible'
             bgmusic.pause();
             lose.play();
-            document.querySelector(".seconds").innerHTML = "Time Over !";
+            document.querySelector(".seconds").innerHTML = "Over !";
             play.style.visibility = 'visible';
             date();
 
@@ -215,11 +222,22 @@ shake.addEventListener('click', () => {
     }
     random()
 })
-onEvent('load', window, () => {
+onEvent('click', restart, () => {
     onload.play();
-    valued.style.visibility = 'visible'
+    valued.style.display = 'grid'
+    two.style.visibility = 'hidden'
+    box.style.visibility = 'hidden'
+    play.innerHTML = ''
+   
     getData()
 
+})
+
+onEvent('click', icon2, () => {
+    valued.style.display = 'none'
+    box.style.visibility = 'visible'
+    two.style.visibility = 'visible'
+    play.innerHTML = 'Type as fast as you can';
 })
 
 window.addEventListener('keyup', (event) => {
